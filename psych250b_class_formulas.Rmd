@@ -1,0 +1,60 @@
+---
+title: "Psych 250b equations"
+author: "Lillian King"
+date: "2026-04-07"
+output: word_document
+---
+
+#F-statistic oneway
+for ch3 q19 (or q1d in the hw)
+```{r}
+n1<- 38
+n2<- 39
+n3<- 39
+n4<- 39
+tot_mu<- 3.35
+mu1<- 3.4
+mu2<- 3.7
+mu3<- 3.5
+mu4<- 2.8
+df_between<- 3
+ss_between<-n1*((mu1-tot_mu)^2)+n2*((mu2-tot_mu)^2)+n3*((mu3-tot_mu)^2)+n4*((mu4-tot_mu)^2)
+ms_between<-ss_between/df_between
+ms_within<-2.152 
+ms_between/ms_within #this is the f stat
+```
+
+#f stat for contrasts
+this chunk and the CI chunk below are for ch4 q3 (or hw ch2a)
+```{r}
+n1<- 10
+n2<- 10
+n3<- 10
+
+mu1<- 12
+mu2<- 10
+mu3<- 6
+
+c1<- 0.5
+c2<- 0.5
+c3<- (-1)
+
+phi<-(c1*mu1)+(c2*mu2)+(c3*mu3)
+sum_cn<-((c1^2)/n1)+((c2^2)/n2)+((c3^2)/n3)
+ms_within<- 25
+
+f_stat<-(phi^2)/(sum_cn*ms_within)
+f_stat
+```
+
+#CI for f stat w contrast
+this is the 2nd part of the above code, so its vars are almost all set in the chunk above
+```{r}
+f_crit<-4.21 #i got this by looking up a table of f-stat critical values
+hi<-(phi)+(sqrt(f_crit)*sqrt(ms_within*sum_cn))
+lo<-(phi)-(sqrt(f_crit)*sqrt(ms_within*sum_cn))
+hi
+lo
+```
+
+
