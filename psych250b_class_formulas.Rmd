@@ -27,23 +27,23 @@ ms_between/ms_within #this is the f stat
 #f stat for contrasts
 this chunk and the CI chunk below are for ch4 q3 (or hw ch2a)
 ```{r}
-n1<- 10
-n2<- 10
-n3<- 10
+n1<- 6
+n2<- 6
+n3<- 6
 
-mu1<- 12
-mu2<- 10
-mu3<- 6
+mu1<- 53.66
+mu2<- 52.16
+mu3<- 63.33
 
-c1<- 0.5
-c2<- 0.5
-c3<- (-1)
+c1<- 1
+c2<- (-1)
+c3<- (0)
 
-phi<-(c1*mu1)+(c2*mu2)+(c3*mu3)
+psi<-(c1*mu1)+(c2*mu2)+(c3*mu3)
 sum_cn<-((c1^2)/n1)+((c2^2)/n2)+((c3^2)/n3)
-ms_within<- 25
+ms_within<- 55.03
 
-f_stat<-(phi^2)/(sum_cn*ms_within)
+f_stat<-(psi^2)/(sum_cn*ms_within)
 f_stat
 ```
 
@@ -51,10 +51,18 @@ f_stat
 this is the 2nd part of the above code, so its vars are almost all set in the chunk above
 ```{r}
 f_crit<-4.21 #i got this by looking up a table of f-stat critical values
-hi<-(phi)+(sqrt(f_crit)*sqrt(ms_within*sum_cn))
-lo<-(phi)-(sqrt(f_crit)*sqrt(ms_within*sum_cn))
+hi<-(psi)+(sqrt(f_crit)*sqrt(ms_within*sum_cn))
+lo<-(psi)-(sqrt(f_crit)*sqrt(ms_within*sum_cn))
 hi
 lo
 ```
 
+#Critical Value for bonfironni
+this might be wrong, but its what the book says to do on pg. 227
+```{r}
+alpha_PC<- 0.05/3 #this is alpha/number of comparisons
+df1<-2 #this is a-1 or num of groups -1
+df2<-15 #this is N-a or num of ppl - num of groups
+qf((1-alpha_PC), df1, df2)
+```
 
