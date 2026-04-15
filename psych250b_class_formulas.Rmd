@@ -57,7 +57,7 @@ hi
 lo
 ```
 
-#Critical Value for bonfironni
+#Observed Value for bonfironni
 this might be wrong, but its what the book says to do on pg. 227
 ```{r}
 alpha_PC<- 0.05/3 #this is alpha/number of comparisons
@@ -65,4 +65,35 @@ df1<-2 #this is a-1 or num of groups -1
 df2<-15 #this is N-a or num of ppl - num of groups
 qf((1-alpha_PC), df1, df2)
 ```
+
+
+
+#HW 2
+#bonfironi Critical Value
+```{r}
+bon_f<-
+bcv<-sqrt(bon_f)
+bcv
+```
+
+
+#scheffe Critical Value
+```{r}
+schef_f<-
+a<-
+scv<-(a-1)*(schef_f)
+scv
+```
+
+
+#Tukey Critical Value
+```{r}
+tuk_q<-
+tcv<-(tuk_q^2)/2
+tcv
+```
+
+
+
+
 
