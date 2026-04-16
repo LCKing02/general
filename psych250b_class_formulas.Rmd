@@ -24,7 +24,7 @@ ms_within<-2.152
 ms_between/ms_within #this is the f stat
 ```
 
-#f stat for contrasts
+#f stat for contrasts (bonferoni?)
 this chunk and the CI chunk below are for ch4 q3 (or hw ch2a)
 ```{r}
 n1<- 6
@@ -35,9 +35,9 @@ mu1<- 53.66
 mu2<- 52.16
 mu3<- 63.33
 
-c1<- 1
-c2<- (-1)
-c3<- (0)
+c1<- 0.5
+c2<- (0.5)
+c3<- (-1)
 
 psi<-(c1*mu1)+(c2*mu2)+(c3*mu3)
 sum_cn<-((c1^2)/n1)+((c2^2)/n2)+((c3^2)/n3)
@@ -71,7 +71,7 @@ qf((1-alpha_PC), df1, df2)
 #HW 2
 #bonfironi Critical Value
 ```{r}
-bon_f<-
+bon_f<-4.54
 bcv<-sqrt(bon_f)
 bcv
 ```
@@ -79,8 +79,8 @@ bcv
 
 #scheffe Critical Value
 ```{r}
-schef_f<-
-a<-
+schef_f<- 3.68
+a<- 3
 scv<-(a-1)*(schef_f)
 scv
 ```
@@ -88,7 +88,7 @@ scv
 
 #Tukey Critical Value
 ```{r}
-tuk_q<-
+tuk_q<-3.67
 tcv<-(tuk_q^2)/2
 tcv
 ```
