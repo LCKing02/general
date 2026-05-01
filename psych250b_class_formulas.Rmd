@@ -17,7 +17,7 @@ mu1<- 3.4
 mu2<- 3.7
 mu3<- 3.5
 mu4<- 2.8
-df_between<- 3
+df_between<- 4
 ss_between<-n1*((mu1-tot_mu)^2)+n2*((mu2-tot_mu)^2)+n3*((mu3-tot_mu)^2)+n4*((mu4-tot_mu)^2)
 ms_between<-ss_between/df_between
 ms_within<-2.152 
@@ -27,19 +27,25 @@ ms_between/ms_within #this is the f stat
 #f stat for contrasts (bonferoni?)
 this chunk and the CI chunk below are for ch4 q3 (or hw ch2a)
 ```{r}
-n1<- 6
-n2<- 6
-n3<- 6
+n1<- 15
+n2<- 15
+n3<- 15
+n4<- 15
+n5<- 15
 
-mu1<- 53.66
-mu2<- 52.16
-mu3<- 63.33
+mu1<- 80
+mu2<- 83
+mu3<- 87
+mu4<- 89
+mu5<- 91
 
-c1<- 0.5
-c2<- (0.5)
-c3<- (-1)
+c1<- (-2)
+c2<- (-1)
+c3<- (0)
+c4<- (-1)
+c5<- (2)
 
-psi<-(c1*mu1)+(c2*mu2)+(c3*mu3)
+psi<-(c1*mu1)+(c2*mu2)+(c3*mu3)+(c4*mu4)+(c5*mu5)
 sum_cn<-((c1^2)/n1)+((c2^2)/n2)+((c3^2)/n3)
 ms_within<- 55.03
 
@@ -59,17 +65,32 @@ lo
 
 #Observed Value for bonfironni
 this might be wrong, but its what the book says to do on pg. 227
+OK i dont think this is how to get the bonferoni observed value, but i do think its how to get the bonferoni critical value? like the same as the table? maybe? im not totally sure still tbh...
 ```{r}
-alpha_PC<- 0.05/2 #this is alpha/number of comparisons
-df1<-2 #this is a-1 or num of groups -1
-df2<-88 #this is N-a or num of ppl - num of groups
+alpha_PC<- 0.05/1 #this is alpha/number of comparisons
+df1<-1 #this is a-1 or num of groups -1
+df2<-75 #this is N-a or num of ppl - num of groups
 qf((1-alpha_PC), df1, df2)
 ```
 
 
 
 #HW 2
+#df calculations
+```{r}
+K<-5#number of groups
+N<-75#total number of ppl across all groups
+schef_df_denom<-(K-1)
+schef_df_numarat<-(N-K)
+bon_df_denom<-(1)
+bon_df_numarat<-(N-K)
+tukey_df_denom<-(K)
+tukey_df_numarat<-(N-K)
+```
+
+
 #bonfironi Critical Value
+so table 3 in the doc of cv's michael gave us has the bon corrected CV, but the equ below will let you calc the bon corrected cv from the notmal table of CVs (table 2)
 ```{r}
 bon_f<-4.54
 bcv<-sqrt(bon_f)
@@ -78,15 +99,17 @@ bcv
 
 
 #scheffe Critical Value
+michael didnt give us the scheffe corected cv table, so we have to calc it from the normal table (tabel 2)
 ```{r}
-schef_f<- 3.68
-a<- 3
+schef_f<- 2.53
+a<- 5
 scv<-(a-1)*(schef_f)
 scv
 ```
 
 
 #Tukey Critical Value
+use table 4?
 ```{r}
 tuk_q<-3.67
 tcv<-(tuk_q^2)/2
@@ -94,6 +117,117 @@ tcv
 ```
 
 
+#HW 3
+#f stat for contrasts (linear?)
+this chunk and the CI chunk below are for ch6 q6
+```{r}
+n_group<- 15 #number of ppl in one group
+n_tot<-75 #number of ppl in total
+
+mu1<- 80
+mu2<- 83
+mu3<- 87
+mu4<- 89
+mu5<- 91
+
+c1<- (-2)
+c2<- (-1)
+c3<- (0)
+c4<- (1)
+c5<- (2)
+
+psi_lin<-(c1*mu1)+(c2*mu2)+(c3*mu3)+(c4*mu4)+(c5*mu5)
+sum_c<- 10
+ss_lin<-((psi_lin^2)*n_group)/sum_c
+ms_within<- 150
+
+f_stat<-(ss_lin)/(ms_within)
+f_stat
+```
+
+#F-statistic omnibus
+for ch6 q6
+```{r}
+n_group<- 15 #number of ppl in one group
+n_tot<-75 #number of ppl in total
+
+mu1<- 80
+mu2<- 83
+mu3<- 87
+mu4<- 89
+mu5<- 91
+
+tot_mu<- 86
+
+df_between<- 4
+ss_between<-n_group*(((mu1-tot_mu)^2)+((mu2-tot_mu)^2)+((mu3-tot_mu)^2)+((mu4-tot_mu)^2)+((mu5-tot_mu)^2))
+ms_between<-ss_between/df_between
+ms_within<-150
+ms_between/ms_within #this is the f stat
+```
+
+#HW 4
+
+#Q1a
+```{r}
+a_rows<- 3
+b_levels<- 2
+ab<-b_levels*a_rows
+df_win<- 60
+N<-ab+df_win
+n_group<-N/ab
+tot_mu<- 10
+mu1<- 12
+mu2<- 10
+mu3<- 8
+ss_A<-(n_group*a_rows)*(((mu1-tot_mu)^2)+((mu2-tot_mu)^2)+((mu3-tot_mu)^2))
+ss_A
+```
+
+#Q1b
+```{r}
+ss_B<-(n_group*b_levels)*(((mu1-tot_mu)^2)+((mu2-tot_mu)^2)+((mu3-tot_mu)^2))
+ss_B
+```
+
+#Q1c
+```{r}
+df_win<-N-(a_rows*b_levels)
+df_win
+df_a<-(a_rows-1)
+df_a
+df_b<-(b_levels-1)
+df_b
+df_ab<-(a_rows-1)
+df_ab
+```
 
 
+#Q1d
+```{r}
+ms_A<-ss_B/df_a
+ms_A
+ms_B<-ss_A/df_b
+ms_B
+AxB<-44
+ms_AB<-AxB/df_ab
+ms_AB
+ss_win<-1620
+ms_win<-ss_win/df_win
+ms_win
+```
+
+#Q1e
+```{r}
+F_A<-ms_A/ms_win
+F_A
+F_B<-ms_B/ms_win
+F_B
+F_AB<-ms_AB/ms_win
+F_AB
+```
+
+```{r}
+ss_tot<-2104
+```
 
